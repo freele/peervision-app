@@ -1,0 +1,14 @@
+{
+  "generator-angular-famous-ionic": {
+    "filenameCase": "camel",
+    "filenameSuffix": true,
+    "appname": "peervisionApp",
+    "clientFolder": "client",
+    "ionic": true,
+    "famous": true,
+    "ngCordova": true,
+    "fontawesome": true,
+    "bootstrap": false,
+    "material": true
+  }
+}
