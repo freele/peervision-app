@@ -9,46 +9,47 @@ var pump = require('pump')
 
 module.exports = function(app) {
 /////////////////////////////////////
-    var vision = peervision(new Buffer(location.toString().split('#')[1], 'hex'))
-    var sw = swarm(signalhub('pv-' + vision.id.toString('hex'), ['https://signalhub.mafintosh.com']))
 
-    sw.on('peer', function (p) {
-      console.error('DEBUG: WebRTC peer')
-      pump(p, vision.createStream(), p)
-    })
+    // var vision = peervision(new Buffer(location.toString().split('#')[1], 'hex'))
+    // var sw = swarm(signalhub('pv-' + vision.id.toString('hex'), ['https://signalhub.mafintosh.com']))
 
-    var AudioContext = window.AudioContext || window.webkitAudioContext
-    var context = new AudioContext()
-    var offset = 0
-    var next = 0
+    // sw.on('peer', function (p) {
+    //   console.error('DEBUG: WebRTC peer')
+    //   pump(p, vision.createStream(), p)
+    // })
 
-    vision.get(offset, function loop (err, blk) {
-      if (err) throw err
-      context.decodeAudioData(blk.buffer, function (buffer) {
-        var source = context.createBufferSource()
+    // var AudioContext = window.AudioContext || window.webkitAudioContext
+    // var context = new AudioContext()
+    // var offset = 0
+    // var next = 0
 
-        source.buffer = buffer
-        source.connect(context.destination)
-        source.start(next)
+    // vision.get(offset, function loop (err, blk) {
+    //   if (err) throw err
+    //   context.decodeAudioData(blk.buffer, function (buffer) {
+    //     var source = context.createBufferSource()
 
-        if (!next) next = context.currentTime
-        else next = next + buffer.duration
-        console.log('processed', offset)
-        vision.get(++offset, loop)
-      }, function () {
-        console.log('error')
-        vision.get(++offset, loop)
-      })
-    })
+    //     source.buffer = buffer
+    //     source.connect(context.destination)
+    //     source.start(next)
 
-    function onerror (err) {
-      console.log('on error')
-      throw err
-    }
+    //     if (!next) next = context.currentTime
+    //     else next = next + buffer.duration
+    //     console.log('processed', offset)
+    //     vision.get(++offset, loop)
+    //   }, function () {
+    //     console.log('error')
+    //     vision.get(++offset, loop)
+    //   })
+    // })
 
-    function onsuccess (buffer) {
-      console.log('decode', buffer)
-    }
+    // function onerror (err) {
+    //   console.log('on error')
+    //   throw err
+    // }
+
+    // function onsuccess (buffer) {
+    //   console.log('decode', buffer)
+    // }
 
 /////////////////////////////////////
 
@@ -63,8 +64,14 @@ module.exports = function(app) {
         var vm = this;
         vm.controllername = fullname;
 
+        this.startListening = function(){
+            console.log('DEBUG: Start Listening');
+
+        }
+
         var producer = peervision();
-        debugger;
+        // $scope.test = 'Test scope';
+        // debugger;
 
         var activate = function() {
 

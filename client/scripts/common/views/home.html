@@ -1,1 +1,24 @@
-<div>Home</div>
+<div>
+	<p>Main page</p>
+	<div ng-controller="main.common.videoFetch as videoFetch">
+		<!-- <h4>Controller name: {{videoFetch.controllername}}</h4> -->
+		<!-- <h4>Test scope {{test}</h4> -->
+
+		<md-content layout-padding>
+			<form name="streamID" ng-submit="videoFetch.startListening()">
+				<div layout layout-sm="column">
+					<md-input-container flex>
+						<label>Stream ID</label>
+						<input ng-model="videoFetch.streamId">
+					</md-input-container>
+					<md-input-container>
+						<md-button class="md-raised md-primary">Start listening</md-button>
+						<!-- <input type="submit" id="submit" value="Submit" /> -->
+					</md-input-container>
+				</div>
+			</form>
+		</md-content>
+
+	</div>
+
+</div>
