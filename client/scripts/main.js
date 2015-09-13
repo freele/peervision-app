@@ -15,6 +15,7 @@ var app = angular.module(namespace, ['ionic', 'ngMaterial',
 ]);
 
 var runDeps = ['$ionicPlatform', '$window'];
+alert('wait 1');
 var run = function($ionicPlatform, $window) {
     $ionicPlatform.ready(function() {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -25,8 +26,14 @@ var run = function($ionicPlatform, $window) {
         if($window.StatusBar) {
             $window.StatusBar.styleDefault();
         }
-        if($window.TestFairy) {
-            $window.TestFairy.begin(process.env.TESTFAIRY_IOS_APP_TOKEN);
+        // if($window.TestFairy) {
+        //     $window.TestFairy.begin(process.env.TESTFAIRY_IOS_APP_TOKEN);
+        // }
+        alert('wait');
+
+        console.log('Test $ionicPlatform.ready(function() {...');
+        if($window.device.platform === 'iOS') {
+            cordova.plugins.iosrtc.registerGlobals();
         }
     });
 };
